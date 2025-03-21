@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+       
+        .slider-container {
+            width: 80%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-images img {
+            width: 100%;
+            height: auto;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <button class="prev">&#10094;</button>
+        <div class="slider-images">
+            <img src="image1.jpg" alt="Image 1">
+            <img src="image2.jpg" alt="Image 2">
+            <img src="image3.jpg" alt="Image 3">
+            <img src="image4.jpg" alt="Image 4">
+        </div>
+        <button class="next">&#10095;</button>
+    </div>
+
+    <script src="slider.js"></script>
+</body>
+</html>
+<script>
+
+const images = [
+    'image1.jpg',
+    'image2.jpg',
+    'image3.jpg',
+    'image4.jpg'
+];
+
+
+const sliderImages = document.querySelector('.slider-images');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+
+let currentIndex = 0;
+
+
+function updateSlider() {
+    sliderImages.style.transform = translateX(-${currentIndex * 100}%);
+}
+
+// Event listener for the "Next" button
+nextButton.addEventListener('click', () => {
+    if (currentIndex < images.length - 1) {
+        currentIndex++;
+    } else {
+        currentIndex = 0; // Go back to the first image
+    }
+    updateSlider();
+});
+
+// Event listener for the "Previous" button
+prevButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex--;
+    } else {
+        currentIndex = images.length - 1; // Go to the last image
+    }
+    updateSlider();
+});
+</script>
